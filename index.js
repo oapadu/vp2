@@ -42,6 +42,8 @@ app.get("/regvisit", (req, res)=>{
 });
 
 app.post("/regvisit", (req, res)=>{
+	const dateNow = dateTime.dateFormattedEt();
+	const timeNow = dateTime.timeFormattedEt();
 	//console.log(reg.body);
 	//avan .txt faili selliselt, et kui seda ei eksisteeri, see luuakse
 	fs.open("public/textfiles/log.txt", "a", (err, file)=> {
@@ -49,7 +51,7 @@ app.post("/regvisit", (req, res)=>{
 			throw err;
 		}
 		else {
-			fs.appendFile("public/textfiles/log.txt", req.body.firstNameInput + " " + req.body.lastNameInput + ";", (err)=>{
+			fs.appendFile("public/textfiles/log.txt", dateNow + ", " + timeNow + " " + req.body.firstNameInput + " " + req.body.lastNameInput + ";", (err)=>{
 				if(err){
 					throw err;
 				}
@@ -58,6 +60,19 @@ app.post("/regvisit", (req, res)=>{
 					res.render("regvisit");
 				}
 			});
+		}
+	});
+});
+
+app.get("/kylastajad", (req, res)=>{
+	let visitorName = [];
+	fs.readFile("public/textfiles/log.txt", "utf8", (err, data)=>{
+		if(err){
+			throw err;
+		}
+		else {
+			visitorName = data.split(";");
+			res.render("kylastajad", {h2: "Külalised", listData: visitorName});
 		}
 	});
 });

@@ -11,10 +11,15 @@
  <P>See leht on loodud <a href="https://www.tlu.ee/" target="_blank">Tallinna Ülikoolis.</a></p>
  <hr>
  <ul>
-  <li><a href="/timenow">Ajainfo</a></li>
-  <li><a href="/vanasonad">Vanasõnad</a></li>
-  <li><a href="/regvisit">Registreeri oma külastus</a></li>
-  <li><a href="/kylastajad">Registreerunud külalised</a></li>
+  <li><a href="/">Avalehele</a></li>
  </ul>
+ <hr>
+ <h2><%= h2 %></h2>
+ <p>Registreeritud külastajate nimekiri:</p>
+ <ol>
+  <% listData.forEach(function(phrase){ %>
+   <li><%= phrase %></li>
+  <% }); %>
+ </ol>
 </body>
 </html>
