@@ -10,13 +10,16 @@
  <p>Seda teksti mitte kasutada ega levitada.</p>
  <P>See leht on loodud <a href="https://www.tlu.ee/" target="_blank">Tallinna Ülikoolis.</a></p>
  <hr>
+  <h2>Eesti filmitegelased</h2>
  <ul>
-  <li><a href="/timenow">Ajainfo</a></li>
-  <li><a href="/vanasonad">Vanasõnad</a></li>
-  <li><a href="/regvisit">Registreeri oma külastus tekstifaili</a></li>
-  <li><a href="/regvisitdb">Registreeri oma külastus andmebaasi</a></li>
-  <li><a href="/visitlog">Registreerunud külalised</a></li>
-  <li><a href="/eestifilm">Eesti filmide info</a></li>
+  <li><a href="/">Avalehele</a></li>
+  <li><a href="/eestifilm">Eesti filmi avaleht</a></li>
+ </ul>
+ <hr>
+ <ul>
+  <% persons.forEach(function(item){ %>
+   <li><%= item.first_name %> <%= item.last_name %>, sündinud: <%= item.birth_date %> </li>
+   <% }); %>
  </ul>
 </body>
 </html>
