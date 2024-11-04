@@ -16,9 +16,8 @@
  </ul>
  <hr>
  <ul>
-  <% photos.forEach(function(item){ %>
-  <li><%= item.file_name %>, <%= item.orig_name %>, <%= item.alt_text %> </li>
-  <img src="https://greeny.cs.tlu.ee/~oskapadu/vp2/public/gallery/thumb/" file_name>
+  <% listData.forEach(function(image){ %>
+  <img src="<%= image.href %>" alt="<%= image.alt %>">
    <% }); %>
  </ul>
 </body>

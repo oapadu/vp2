@@ -182,18 +182,22 @@ app.post("/photoupload", upload.single("photoInput"), (req, res)=>{
 });
 
 app.get("/gallery", (req, res)=>{
-	//loon andmebaasipäringu
-	let sqlReq = "SELECT file_name, orig_name, alt_text FROM photos";
-	conn.query(sqlReq, (err,sqlRes)=>{
+	let sqlReq = "SELECT file_name, alt_text FROM photos WHERE privacy = ? AND deleted IS NULL ORDER BY id DESC";
+	const privacy = 3;
+	let photoList = [];
+	conn.query(sqlReq, [privacy], (err, result)=>{
 		if(err){
-			res.render("gallery", {photos: []});
-			//throw err;
+			throw err;
 		}
 		else {
-			//console.log(sqlRes);
-			res.render("gallery", {photos:sqlRes});
+			console.log(result);
+			for(let i = 0; i < result.length; i ++) {
+				photoList.push({href: "/gallery/thumb/" + result[i].file_name, alt: result[i].alt_text});
+			}
+			res.render("gallery", {listData: photoList});
 		}
 	});
+	//res.render("gallery");
 });
 
 
